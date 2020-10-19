@@ -40,7 +40,7 @@ public class UserController {
 	}
 
 	@GetMapping(value = "/accounts")
-	public ResponseEntity<List<UserAccount>> findAll() {
+	public ResponseEntity<List<UserAccount>> findAllUserAccounts() {
 		logger.info("All user accounts in a sortable grid!");
 		List<UserAccount> list = this.userService.getAll();
 
@@ -53,7 +53,7 @@ public class UserController {
 	}
 
 	@PostMapping(value = "/account", consumes = "application/json")
-	public ResponseEntity<List<UserAccount>> addBook(@Valid @RequestBody List<UserAccount> userAccount) {
+	public ResponseEntity<List<UserAccount>> addUserAccount(@Valid @RequestBody List<UserAccount> userAccount) {
 		UserAccount saved = userService.save(userAccount.get(0));
 		logger.info("User account {} added!", saved.toString());
 
@@ -64,7 +64,7 @@ public class UserController {
 	}
 
 	@DeleteMapping("/account/{email}")
-	public ResponseEntity<List<UserAccount>> delete(@PathVariable(value = "email") String email) {
+	public ResponseEntity<List<UserAccount>> removeUserAccount(@PathVariable(value = "email") String email) {
 		UserAccount userAccount = this.userService.findByEmail(email);
 		boolean deleted = this.userService.delete(userAccount);
 
@@ -82,7 +82,7 @@ public class UserController {
 	}
 
 	@PutMapping(value = "/account/{id}", consumes = "application/json")
-	public ResponseEntity<List<UserAccount>> updateUserAccount(@PathVariable(value = "id") long id,
+	public ResponseEntity<List<UserAccount>> editUserAccount(@PathVariable(value = "id") long id,
 			@Valid @RequestBody List<UserAccount> userAccountDetails){
 		UserAccount userAccount = this.userService.findById(id);
 		if (userAccount == null) {

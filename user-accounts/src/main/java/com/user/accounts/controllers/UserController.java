@@ -2,7 +2,6 @@ package com.user.accounts.controllers;
 
 import java.util.List;
 
-import javax.management.relation.RelationNotFoundException;
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 
@@ -84,7 +83,7 @@ public class UserController {
 
 	@PutMapping(value = "/account/{id}", consumes = "application/json")
 	public ResponseEntity<List<UserAccount>> updateUserAccount(@PathVariable(value = "id") long id,
-			@Valid @RequestBody List<UserAccount> userAccountDetails) throws RelationNotFoundException {
+			@Valid @RequestBody List<UserAccount> userAccountDetails){
 		UserAccount userAccount = this.userService.findById(id);
 		if (userAccount == null) {
 			throw new EntityNotFoundException("Sorry, there is no user account with that id!");
